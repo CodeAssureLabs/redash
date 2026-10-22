@@ -35,7 +35,8 @@ def utcnow():
     Without the timezone data, when the timestamp stored to the database it gets the current timezone of the server,
     which leads to errors in calculations.
     """
-    return datetime.datetime.now(pytz.utc)
+    now = datetime.datetime.now(pytz.utc)
+    return now.replace(microsecond=(now.microsecond // 1000) * 1000)
 
 
 def dt_from_timestamp(timestamp, tz_aware=True):
