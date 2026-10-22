@@ -132,7 +132,7 @@ def _sanitize_data(data):
     return data
 
 
-def json_dumps(data, *args, **kwargs):
+def json_dumps_safe(data, *args, **kwargs):
     """A custom JSON dumping function which passes all parameters to the
     json.dumps function."""
     kwargs.setdefault("cls", JSONEncoder)
