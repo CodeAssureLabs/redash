@@ -64,7 +64,8 @@ def gen_query_hash(sql):
     return hashlib.md5(sql.encode("utf-8"), usedforsecurity=False).hexdigest()
 
 
-def generate_token(length):
+def generate_token():
+    length = 40
     chars = "abcdefghijklmnopqrstuvwxyz" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "0123456789"
 
     rand = random.SystemRandom()
