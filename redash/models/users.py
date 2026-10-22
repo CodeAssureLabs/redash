@@ -13,6 +13,7 @@ from sqlalchemy_utils import EmailType
 from sqlalchemy_utils.models import generic_repr
 
 from redash import redis_connection
+from redash.tasks.general import record_event as enqueue_event
 from redash.utils import dt_from_timestamp, generate_token
 
 from .base import Column, GFKBase, db, key_type, primary_key
@@ -124,6 +125,9 @@ class User(TimestampMixin, db.Model, BelongsToOrgMixin, UserMixin, PermissionsCh
 
     def regenerate_api_key(self):
         self.api_key = generate_token(40)
+
+    def record_login_event(self):
+        enqueue_event({"action": "login", "object_type": "user", "object_id": self.id, "user_id": self.id, "org_id": self.org_id})
 
     def to_dict(self, with_api_key=False):
         profile_image_url = self.profile_image_url
