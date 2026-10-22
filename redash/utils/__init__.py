@@ -48,7 +48,7 @@ def dt_from_timestamp(timestamp, tz_aware=True):
 
 
 def slugify(s):
-    return re.sub(r"[^a-z0-9_\-]+", "-", s.lower())
+    return re.sub(r"[^a-z0-9_\-]+", "-", s.lower()).strip("-")
 
 
 def gen_query_hash(sql):
