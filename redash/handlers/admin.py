@@ -11,7 +11,6 @@ from redash.utils import json_loads
 
 
 @routes.route("/api/admin/queries/outdated", methods=["GET"])
-@require_super_admin
 @login_required
 def outdated_queries():
     manager_status = redis_connection.hgetall("redash:status")
